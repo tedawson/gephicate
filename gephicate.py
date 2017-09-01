@@ -11,10 +11,22 @@ read_end = whole_text.find('<end>')
 text = whole_text[read_start: read_end]
 
 z = len(action) + 1
-word = text.find(action)
+#word = text.find(action)
+searcher = text[0]
 
+i = 0
+j = len(text)
 
-print text[word + z]
-print text
+while i < j:
+    word = text.find(action)
+    if word == -1:
+        break
+    else:
+        print text[word + z]
+        texto = text[word + z: ]
+        i = i + (len(text) - len(texto))
+        text = texto
+	
+# print text
 
 
