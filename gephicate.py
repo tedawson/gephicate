@@ -11,18 +11,32 @@ read_end = whole_text.find('<end>')
 text = whole_text[read_start: read_end]
 
 z = len(action) + 1
-i = 0
-j = len(text)
 
+g = open(target, 'a')
+
+text_list = text.split()
+
+for token in text_list:
+    if token == action:
+	    g.write('\n' + token)
+
+f.close()
+g.close()
+
+
+# retired idea for finding words in plain text (not list)
+
+'''i = 0
+j = len(text)
 while i < j:
-    word = text.find(action)
-    if word == -1:
+    wordspot = text.find(action)
+    if wordspot == -1:
         break
     else:
-        print text[word + z]
-        texto = text[word + z: ]
+        print text[wordspot + z]
+        texto = text[wordspot + z: ]
         i = i + (len(text) - len(texto))
-        text = texto
+        text = texto'''
 	
 # print text
 
