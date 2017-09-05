@@ -50,8 +50,6 @@ with open('nodes.csv', 'w') as csvfile:
         writer.writerow({'id': x,'label': y})
 
 # split list of pairs into a list of sources and targets
-print pairs
-
 i = 1
 source = []
 target = []
@@ -61,10 +59,6 @@ for item in pairs:
     else:
 	    source.append(item)
     i += 1
-
-print source
-print target
-print numbered_nodes
 
 # replace names in source and targets list with node numbers, zip
 reverse_nodes = [(y,x) for x, y in numbered_nodes]
@@ -80,13 +74,9 @@ for item in target:
     zork = nodes_dict.get(item)
     target_column.append(zork)
 
-print source
-print source_column
-print target_column
 edges = zip(source_column, target_column)
-print edges
-# weight edges
 
+# weight edges
 
 # create edges csv
 with open('edges.csv', 'w') as csvfile:
