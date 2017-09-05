@@ -49,6 +49,7 @@ with open('nodes.csv', 'w') as csvfile:
     for x,y in numbered_nodes:
         writer.writerow({'id': x,'label': y})
 
+# what is the purpose of this step?
 # split list of pairs into a list of sources and targets
 i = 1
 source = []
@@ -77,12 +78,22 @@ for item in target:
 edges = zip(source_column, target_column)
 
 # weight edges
+# get weights and zip together with edges
+weights = [edges.count(x) for x in edges]
+weighted_edges = zip(edges, weights)
 
+# remove duplicates
+final_edges = []
+for tuple in weighted_edges:
+    if tuple not in final_edges:
+        final_edges.append(tuple)
+	
+	
 # create edges csv
 with open('edges.csv', 'w') as csvfile:
-    fieldnames = ['source', 'target', 'type']
+    fieldnames = ['source', 'target', 'type', 'weight']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     writer.writeheader()
-    for x,y in edges:
-        writer.writerow({'source': x,'target': y, 'type': 'directed'})
+    for (x,y),z in final_edges:
+        writer.writerow({'source': x,'target': y, 'type': 'directed', 'weight': z})
