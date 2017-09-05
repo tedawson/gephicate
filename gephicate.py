@@ -29,7 +29,6 @@ for token in text_list:
 f.close()
 g.close()
 
-print pairs
 # extract nodes from pairs
 nodes = []
 for item in pairs:
@@ -50,7 +49,50 @@ with open('nodes.csv', 'w') as csvfile:
     for x,y in numbered_nodes:
         writer.writerow({'id': x,'label': y})
 
-# next steps: replace names in pairs with node ids, create edges csv
+# split list of pairs into a list of sources and targets
+print pairs
+
+i = 1
+source = []
+target = []
+for item in pairs:
+    if i % 2 == 0:
+	    target.append(item)
+    else:
+	    source.append(item)
+    i += 1
+
+print source
+print target
+print numbered_nodes
+
+# replace names in source and targets list with node numbers, zip
+reverse_nodes = [(y,x) for x, y in numbered_nodes]
+nodes_dict = dict(reverse_nodes)
+
+source_column = []
+for item in source:
+    zork = nodes_dict.get(item)
+    source_column.append(zork)
+
+target_column = []
+for item in target:
+    zork = nodes_dict.get(item)
+    target_column.append(zork)
+
+print source
+print source_column
+print target_column
+edges = zip(source_column, target_column)
+print edges
+# weight edges
 
 
+# create edges csv
+with open('edges.csv', 'w') as csvfile:
+    fieldnames = ['source', 'target', 'type']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
+    writer.writeheader()
+    for x,y in edges:
+        writer.writerow({'source': x,'target': y, 'type': 'directed'})
