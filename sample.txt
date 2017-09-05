@@ -1,11 +1,17 @@
-Film Protocol
+Film Protocol of an amazing movie everyone should watch.
+As you can see, this protocol can have whatever information you want in it, so long as it has the begin and end tags and three term relationships.
 
 <begin>
-1:04 Bob touches Zue
-1:08 Ralph touches Sue
-1:12 Ralph touches Bob
-1:16 Ralph touches Sue
-1:20 Ralph touches Sue
-1:24 Diamond touches Bob
-1:28 Sue touches Ralph
+1:04 Bob TOUCHES Sue (just a handshake)
+1:08 Ralph TOUCHES Sue (way more than a handshake)
+1:09 Ralph KISSES Sue (see!)
+1:10 Ralph SPEAKSTO Bob
+1:12 Ralph TOUCHES Bob -- the really amazing thing about this interaction is that Ralph's fingers begin at Bob's elbow and then gradually work their way up towards his shoulder, and it kind a looks like he's trying to judge the size of Bob's biceps...
+1:16 Ralph TOUCHES Sue
+1:17 Sue SPEAKSTO Ralph
+1:17 Sue SPEAKSTO Bob at the same time
+1:18 Ralph SPEAKSTO Sue (what a line!)
+1:20 Ralph TOUCHES Sue
+1:24 Diamond TOUCHES Bob
+1:28 Sue TOUCHES Ralph
 <end>
