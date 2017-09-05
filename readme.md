@@ -9,7 +9,7 @@ Begin with a protocol. This can contain whatever information you want, but the p
 Once you have the protocol, it is time to Gephicate. Gephicate is a Python script (thus you must have Python installed on your computer and have at least some idea of how to run scripts. Someday there will be a handy link here for those that are just getting started with Python, in the meantime, please consult your trusted search engine). From the commandline, run Gephy with two arguments, first the path of the protocol, then the action you are interested in graphing. Thus, if using sample.txt as a protocol and wishing to create a graph of who touches whom, you would enter this (assuming everything is in the same directory):
 
 ```
-python gephicate.py sample.txt "touches"
+python gephicate.py sample.txt "TOUCHES"
 ```
 
 This will produce three files. "list-of-relations.txt" is just an easy check to see that Gephicate pulled out the items you are interested in. It should contain a series of three item sets that reflect the relationships you were looking for. The other items are "nodes.csv" and "edges.csv". These we will import into Gephy.
