@@ -3,13 +3,27 @@
 from sys import argv
 import csv
 
+# possibly rework to get source and action via prompt?
 script, source, action = argv
 
+# get the protocol ready
 f = open(source, 'r')
 whole_text = f.read()
 read_start = whole_text.find('<begin>')
 read_end = whole_text.find('<end>')
-text = whole_text[read_start: read_end]
+main_text = whole_text[read_start: read_end]
+
+# skip stuff in angle brackets
+text = ''
+for char in main_text:
+	if char == '<':
+		inside = 1
+	elif inside == 1 and char == '>':
+		inside = 0
+	elif inside == 1:
+		continue
+	else:
+		text += char
 
 # create a file to show which items have been taken from protocol
 g = open('list-of-relations.txt', 'a')
