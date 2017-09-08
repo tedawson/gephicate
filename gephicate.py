@@ -2,6 +2,7 @@
 
 from sys import argv
 import csv
+import os
 
 # possibly rework to get source and action via prompt?
 script, source, action = argv
@@ -25,8 +26,14 @@ for char in main_text:
 	else:
 		text += char
 
+# create a directory for files
+dirname = raw_input('Name of directory for results:')
+
+os.makedirs(dirname)
+
 # create a file to show which items have been taken from protocol
-g = open('list-of-relations.txt', 'a')
+filename = 'list-of-relations.txt'
+g = open(os.path.join(dirname,filename), 'a')
 g.write('This list shows the relations from ' + source + ' that Gephicate used to construct the nodes and edges CSVs.')
 text_list = text.split()
 
