@@ -4,9 +4,9 @@ from sys import argv
 import csv
 import os
 
-# possibly rework to get source and action via prompt?
-script, source, action = argv
+script, source = argv
 
+action = raw_input('Please enter a relationship keyword: ')
 # get the protocol ready
 f = open(source, 'r')
 whole_text = f.read()
@@ -27,7 +27,7 @@ for char in main_text:
 		text += char
 
 # create a directory for files
-dirname = raw_input('Name of directory for results:')
+dirname = raw_input('Name of directory for results: ')
 
 os.makedirs(dirname)
 
