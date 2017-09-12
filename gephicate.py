@@ -62,7 +62,7 @@ for item in pairs:
 numbered_nodes = list(enumerate(nodes, 1))
 
 # create nodes.csv and populate with numbered_nodes values
-with open('nodes.csv', 'w') as csvfile:
+with open(os.path.join(dirname,'nodes.csv'), 'w') as csvfile:
     fieldnames = ['id', 'label']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
@@ -111,7 +111,7 @@ for tuple in weighted_edges:
 	
 	
 # create edges csv
-with open('edges.csv', 'w') as csvfile:
+with open(os.path.join(dirname,'edges.csv'), 'w') as csvfile:
     fieldnames = ['source', 'target', 'type', 'weight']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
