@@ -37,4 +37,10 @@ pairs = gephifun.getPairs(text, dirname, action)
 # close protocol source file, as all necessary info is removed
 f.close()
 
+nodes, nodes_dict = gephifun.getNodes(pairs)
+
+print nodes
+print nodes_dict
+
+
 nodes = gephifun.getNodes(pairs)

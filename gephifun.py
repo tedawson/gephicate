@@ -32,4 +32,22 @@ def getNodes(pairs):
 			node_names.append(item)
 	# associate nodes with numbers
 	nodes = list(enumerate(node_names, 1))
-	return nodes
+	reverse_nodes = [(y,x) for x, y in nodes]
+	nodes_dict = dict(reverse_nodes)
+	return nodes, nodes_dict
+	
+def getEdges(nodes, nodes_dict):
+	'''gets edges'''
+	# need to do this with two lists like in gephicate?
+	edges = []
+	i = 1
+	for item in nodes:
+		if i % 2 == 0:
+			source = nodes_dict.get(item)
+			edges.append(source)
+		else:
+			target = nodes_dict.get(item)
+			edges.append(target)
+	
+	return edges
+# put all csv function at bottom
