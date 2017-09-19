@@ -21,3 +21,15 @@ def getPairs(text, dirname, action):
 	# close list of relations
 	g.close()
 	return pairs
+	
+def getNodes(pairs):
+	'''Extracts node names from "pairs" and numbers them, returning a list of tuples'''
+	node_names = []
+	for item in pairs:
+		if item in node_names:
+			pass
+		else:
+			node_names.append(item)
+	# associate nodes with numbers
+	nodes = list(enumerate(node_names, 1))
+	return nodes

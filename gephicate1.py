@@ -32,5 +32,9 @@ dirname = raw_input('Name of directory for results: ')
 
 os.makedirs(dirname)
 
-gephifun.getPairs(text, dirname, action)
+pairs = gephifun.getPairs(text, dirname, action)
 
+# close protocol source file, as all necessary info is removed
+f.close()
+
+nodes = gephifun.getNodes(pairs)
