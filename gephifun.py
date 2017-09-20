@@ -38,7 +38,6 @@ def getNodes(pairs):
 	
 def getEdges(pairs, nodes_dict):
 	'''gets edges'''
-	# need to do this with two lists like in gephicate?
 	sources = []
 	targets = []
 	i = 1
@@ -59,6 +58,13 @@ def weightEdges(edges):
 	weighted_edges = zip(edges, weights)
 	return weighted_edges
 
-
+def removeDuplicates(edges):
+	'''removes duplicates'''
+	final_edges = []
+	for tuple in edges:
+		if tuple not in final_edges:
+			final_edges.append(tuple)
+	return final_edges
+			
 #def writeCSVs():
 

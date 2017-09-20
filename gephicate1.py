@@ -45,3 +45,7 @@ print edges
 weighted_edges = gephifun.weightEdges(edges)
 
 print weighted_edges
+
+final_edges = gephifun.removeDuplicates(weighted_edges)
+
+print final_edges
