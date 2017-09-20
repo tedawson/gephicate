@@ -31,21 +31,30 @@ for char in main_text:
 dirname = raw_input('Name of directory for results: ')
 
 os.makedirs(dirname)
-
 pairs = gephifun.getPairs(text, dirname, action)
 
 # close protocol source file, as all necessary info is removed
 f.close()
 
 nodes, nodes_dict = gephifun.getNodes(pairs)
-
 edges = gephifun.getEdges(pairs, nodes_dict)
-print edges
-
 weighted_edges = gephifun.weightEdges(edges)
-
-print weighted_edges
-
 final_edges = gephifun.removeDuplicates(weighted_edges)
 
-print final_edges
+# create nodes.csv and populate with numbered_nodes values
+with open(os.path.join(dirname,'nodes.csv'), 'w') as csvfile:
+    fieldnames = ['id', 'label']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for x,y in nodes:
+        writer.writerow({'id': x,'label': y})
+
+# create edges.csv
+with open(os.path.join(dirname,'edges.csv'), 'w') as csvfile:
+    fieldnames = ['source', 'target', 'type', 'weight']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for (x,y),z in final_edges:
+        writer.writerow({'source': x,'target': y, 'type': 'directed', 'weight': z})
