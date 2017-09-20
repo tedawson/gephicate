@@ -3,6 +3,7 @@
 from sys import argv
 import csv
 import os
+import gephifun
 
 script, source = argv
 
@@ -30,36 +31,15 @@ for char in main_text:
 dirname = raw_input('Name of directory for results: ')
 
 os.makedirs(dirname)
-
-# create a file to show which items have been taken from protocol
-filename = 'list-of-relations.txt'
-g = open(os.path.join(dirname,filename), 'a')
-g.write('This list shows the relations from ' + source + ' that Gephicate used to construct the nodes and edges CSVs.')
-text_list = text.split()
-
-# move through text and extract words on either side of action, putting these both in g and in a list for further use
-i = 0
-pairs = []
-for token in text_list:
-    if token == action:
-	   g.write('\n' + str(text_list[i-1: i+2]))
-	   pairs += [text_list[i-1], text_list[i+1]]
-    i += 1
+pairs = gephifun.getPairs(text, dirname, action)
 
 # close protocol source file, as all necessary info is removed
 f.close()
-g.close()
 
-# extract nodes from pairs
-nodes = []
-for item in pairs:
-    if item in nodes:
-	    pass
-    else:
-	    nodes.append(item)
-
-# associate nodes with numbers
-numbered_nodes = list(enumerate(nodes, 1))
+nodes, nodes_dict = gephifun.getNodes(pairs)
+edges = gephifun.getEdges(pairs, nodes_dict)
+weighted_edges = gephifun.weightEdges(edges)
+final_edges = gephifun.removeDuplicates(weighted_edges)
 
 # create nodes.csv and populate with numbered_nodes values
 with open(os.path.join(dirname,'nodes.csv'), 'w') as csvfile:
@@ -67,50 +47,10 @@ with open(os.path.join(dirname,'nodes.csv'), 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     writer.writeheader()
-    for x,y in numbered_nodes:
+    for x,y in nodes:
         writer.writerow({'id': x,'label': y})
 
-# what is the purpose of this step?
-# split list of pairs into a list of sources and targets
-i = 1
-source = []
-target = []
-for item in pairs:
-    if i % 2 == 0:
-	    target.append(item)
-    else:
-	    source.append(item)
-    i += 1
-
-# replace names in source and targets list with node numbers, zip
-reverse_nodes = [(y,x) for x, y in numbered_nodes]
-nodes_dict = dict(reverse_nodes)
-
-source_column = []
-for item in source:
-    zork = nodes_dict.get(item)
-    source_column.append(zork)
-
-target_column = []
-for item in target:
-    zork = nodes_dict.get(item)
-    target_column.append(zork)
-
-edges = zip(source_column, target_column)
-
-# weight edges
-# get weights and zip together with edges
-weights = [edges.count(x) for x in edges]
-weighted_edges = zip(edges, weights)
-
-# remove duplicates
-final_edges = []
-for tuple in weighted_edges:
-    if tuple not in final_edges:
-        final_edges.append(tuple)
-	
-	
-# create edges csv
+# create edges.csv
 with open(os.path.join(dirname,'edges.csv'), 'w') as csvfile:
     fieldnames = ['source', 'target', 'type', 'weight']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
