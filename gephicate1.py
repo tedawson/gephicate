@@ -39,8 +39,5 @@ f.close()
 
 nodes, nodes_dict = gephifun.getNodes(pairs)
 
-print nodes
-print nodes_dict
+edges = gephifun.getEdges(pairs, nodes_dict)
 
-
-nodes = gephifun.getNodes(pairs)

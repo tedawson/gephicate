@@ -36,18 +36,20 @@ def getNodes(pairs):
 	nodes_dict = dict(reverse_nodes)
 	return nodes, nodes_dict
 	
-def getEdges(nodes, nodes_dict):
+def getEdges(pairs, nodes_dict):
 	'''gets edges'''
 	# need to do this with two lists like in gephicate?
 	edges = []
 	i = 1
-	for item in nodes:
+	for item in pairs:
 		if i % 2 == 0:
 			source = nodes_dict.get(item)
 			edges.append(source)
 		else:
 			target = nodes_dict.get(item)
 			edges.append(target)
+		i += 1
 	
 	return edges
+	
 # put all csv function at bottom
