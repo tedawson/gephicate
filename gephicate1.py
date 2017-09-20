@@ -40,4 +40,8 @@ f.close()
 nodes, nodes_dict = gephifun.getNodes(pairs)
 
 edges = gephifun.getEdges(pairs, nodes_dict)
+print edges
 
+weighted_edges = gephifun.weightEdges(edges)
+
+print weighted_edges

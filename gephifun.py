@@ -39,17 +39,26 @@ def getNodes(pairs):
 def getEdges(pairs, nodes_dict):
 	'''gets edges'''
 	# need to do this with two lists like in gephicate?
-	edges = []
+	sources = []
+	targets = []
 	i = 1
 	for item in pairs:
 		if i % 2 == 0:
-			source = nodes_dict.get(item)
-			edges.append(source)
-		else:
 			target = nodes_dict.get(item)
-			edges.append(target)
+			targets.append(target)
+		else:
+			source = nodes_dict.get(item)
+			sources.append(source)
 		i += 1
-	
+	edges = zip(sources, targets)
 	return edges
 	
-# put all csv function at bottom
+def weightEdges(edges):
+	'''assigns weights to edges'''
+	weights = [edges.count(x) for x in edges]
+	weighted_edges = zip(edges, weights)
+	return weighted_edges
+
+
+#def writeCSVs():
+
