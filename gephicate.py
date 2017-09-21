@@ -8,6 +8,8 @@ import gephifun
 script, source = argv
 
 action = raw_input('Please enter a relationship keyword: ')
+print "Weighting key: 1 is normal; numbers larger than 1 will exaggerate weight, numbers smaller than 1 diminish it. If you don't know what to put, try .5"
+heavyness = float(raw_input('Enter a weighting factor: '))
 # get the protocol ready
 f = open(source, 'r')
 whole_text = f.read()
@@ -29,7 +31,6 @@ for char in main_text:
 
 # create a directory for files
 dirname = raw_input('Name of directory for results: ')
-
 os.makedirs(dirname)
 pairs = gephifun.getPairs(text, dirname, action)
 
@@ -38,7 +39,7 @@ f.close()
 
 nodes, nodes_dict = gephifun.getNodes(pairs)
 edges = gephifun.getEdges(pairs, nodes_dict)
-weighted_edges = gephifun.weightEdges(edges)
+weighted_edges = gephifun.weightEdges(edges, heavyness)
 final_edges = gephifun.removeDuplicates(weighted_edges)
 
 # create nodes.csv and populate with numbered_nodes values

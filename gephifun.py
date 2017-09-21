@@ -52,9 +52,9 @@ def getEdges(pairs, nodes_dict):
 	edges = zip(sources, targets)
 	return edges
 	
-def weightEdges(edges):
+def weightEdges(edges, heavyness):
 	'''assigns weights to edges'''
-	weights = [edges.count(x) for x in edges]
+	weights = [edges.count(x) * heavyness for x in edges]
 	weighted_edges = zip(edges, weights)
 	return weighted_edges
 
